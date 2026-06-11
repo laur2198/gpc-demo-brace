@@ -37,9 +37,13 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: clip; }
 
-/* reveal scaffold — elementele sunt vizibile by default;
-   reveal.js le ascunde DOAR când motion e activ (vezi Faza 7) */
+/* reveal scaffold — elementele sunt vizibile by default (no-JS / reduced-motion).
+   Doar când <html class="motion"> (JS activ, motion permis) le ascundem
+   până le revelează reveal.js — fără FOUC pe headline-uri. */
 [data-reveal] { will-change: transform, opacity; }
+.split-word { display: inline-block; }
+.motion [data-split] { visibility: hidden; }
+.motion [data-reveal] { opacity: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

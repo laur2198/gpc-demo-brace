@@ -1,0 +1,35 @@
+---
+import Placeholder from './Placeholder.astro';
+
+// 8 imagini, layout asimetric. Variază: preparate, detaliu, interior, foc.
+// Swap: înlocuiește <Placeholder> cu <Image> când vin gallery-1..8.avif.
+const items = [
+  { file: 'gallery-1.avif', ratio: '4/3', span: 'sm:col-span-2 lg:col-span-3 lg:row-span-2' },
+  { file: 'gallery-2.avif', ratio: '3/4', span: 'lg:col-span-2 lg:row-span-2' },
+  { file: 'gallery-3.avif', ratio: '1/1', span: 'lg:col-span-1' },
+  { file: 'gallery-4.avif', ratio: '1/1', span: 'lg:col-span-1' },
+  { file: 'gallery-5.avif', ratio: '3/2', span: 'sm:col-span-2 lg:col-span-3' },
+  { file: 'gallery-6.avif', ratio: '1/1', span: 'lg:col-span-2' },
+  { file: 'gallery-7.avif', ratio: '4/3', span: 'lg:col-span-3' },
+  { file: 'gallery-8.avif', ratio: '3/2', span: 'sm:col-span-2 lg:col-span-2' },
+];
+---
+
+<div
+  class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-6 lg:[grid-auto-rows:minmax(0,1fr)]"
+  data-gallery
+>
+  {items.map((it) => (
+    <figure
+      class={`group relative overflow-hidden rounded-2xl ${it.span}`}
+      data-gallery-item
+      data-reveal
+    >
+      {/* Placeholder cât timp nu sunt imaginile reale.
+          La swap, devine: <img data-gallery-img src=... /> + fallback CSS scale. */}
+      <div class="h-full transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:group-hover:scale-100">
+        <Placeholder file={it.file} ratio={it.ratio} class="h-full !rounded-2xl" />
+      </div>
+    </figure>
+  ))}
+</div>
