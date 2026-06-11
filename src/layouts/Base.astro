@@ -1,0 +1,84 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ConceptBanner from '../components/ConceptBanner.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'BRACE — Trattoria · Cucina italiana la grătar pe jar · Brașov',
+  description = 'Trattoria italiană la Brașov: paste făcute în casă, carne pe jar și pizza din cuptor cu lemne. Rețete italiene, fără scurtături.',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/og.png', Astro.site).href;
+
+const restaurantSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: 'BRACE Trattoria',
+  servesCuisine: 'Italian',
+  priceRange: '$$',
+  telephone: '+40700000000',
+  url: 'https://brace-concept.pages.dev/',
+  image: ogImage,
+  acceptsReservations: true,
+  menu: 'https://brace-concept.pages.dev/meniu/',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Str. Mureșenilor 8',
+    addressLocality: 'Brașov',
+    addressCountry: 'RO',
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '12:00',
+    closes: '23:00',
+  },
+};
+---
+
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    {/* OG / social */}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="ro_RO" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(restaurantSchema)} />
+
+    <ClientRouter />
+  </head>
+  <body class="min-h-dvh bg-cream text-ink antialiased">
+    <ConceptBanner transition:persist />
+    <Nav transition:persist />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer transition:persist />
+
+    <script>
+      import '../scripts/smooth.js';
+    </script>
+  </body>
+</html>

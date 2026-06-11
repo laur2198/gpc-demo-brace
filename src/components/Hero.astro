@@ -1,0 +1,38 @@
+---
+import Placeholder from './Placeholder.astro';
+---
+
+<section class="relative overflow-hidden">
+  <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-16 pt-14 lg:grid-cols-2 lg:gap-12 lg:pb-24 lg:pt-20">
+    <div class="order-2 lg:order-1">
+      <p class="mb-5 text-xs font-medium tracking-[0.22em] text-terracotta">
+        CUCINA ITALIANA · LA GRĂTAR PE JAR · BRAȘOV
+      </p>
+      <h1 class="h1 text-charcoal" data-split>
+        Gust adevărat,<br />copt pe foc.
+      </h1>
+      <p class="lead mt-6 max-w-md text-charcoal/75" data-reveal>
+        Paste făcute în casă, carne pe jar și pizza din cuptor cu lemne.
+        Rețete italiene, fără scurtături.
+      </p>
+      <div class="mt-9 flex flex-wrap items-center gap-4" data-reveal>
+        <a
+          href="/rezervari/"
+          class="rounded-full bg-terracotta px-7 py-3.5 text-sm font-medium text-cream transition-colors hover:bg-ember"
+        >
+          Rezervă o masă
+        </a>
+        <a
+          href="/meniu/"
+          class="rounded-full border border-charcoal/20 px-7 py-3.5 text-sm font-medium text-charcoal transition-colors hover:border-charcoal/40"
+        >
+          Vezi meniul
+        </a>
+      </div>
+    </div>
+
+    <div class="order-1 lg:order-2" data-hero-media>
+      <Placeholder file="hero.avif" ratio="16/9" eager class="shadow-2xl shadow-charcoal/20" />
+    </div>
+  </div>
+</section>

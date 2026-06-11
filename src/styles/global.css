@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/500.css";
+@import "@fontsource/playfair-display/600.css";
+@import "@fontsource-variable/inter";
+
+:root {
+  --charcoal: #2A2320;   /* charcoal ars — base dark, text */
+  --terracotta: #B5532A; /* accent cald — CTA, highlights */
+  --cream: #F4ECE1;      /* cream cald — base light */
+  --sage: #7C8466;       /* verde mut — accent secundar */
+  --ember: #D97A34;      /* jar/flacără — micro-accente */
+  --ink: #1C1714;
+}
+
+@theme {
+  --color-charcoal: var(--charcoal);
+  --color-terracotta: var(--terracotta);
+  --color-cream: var(--cream);
+  --color-sage: var(--sage);
+  --color-ember: var(--ember);
+  --color-ink: var(--ink);
+  --font-display: "Playfair Display", serif;
+  --font-body: "Inter Variable", sans-serif;
+}
+
+html { background: var(--cream); color: var(--ink); }
+body { font-family: var(--font-body); }
+h1, h2, h3 { font-family: var(--font-display); }
+
+.h1 { font-size: clamp(2.75rem, 7vw, 5rem); line-height: 1.02; letter-spacing: -0.02em; }
+.h2 { font-size: clamp(2rem, 4.5vw, 3.25rem); line-height: 1.08; }
+.lead { font-size: 1.0625rem; line-height: 1.7; }
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: clip; }
+
+/* reveal scaffold — elementele sunt vizibile by default;
+   reveal.js le ascunde DOAR când motion e activ (vezi Faza 7) */
+[data-reveal] { will-change: transform, opacity; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
