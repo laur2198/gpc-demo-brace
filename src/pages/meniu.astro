@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import MenuNav from '../components/MenuNav.astro';
+import MenuCategory from '../components/MenuCategory.astro';
+
+const categories = [
+  {
+    id: 'antipasti',
+    label: 'Antipasti',
+    items: [
+      { name: 'Bruschette al pomodoro', desc: 'roșii, busuioc, usturoi, ulei extravirgin', price: '24 lei' },
+      { name: 'Tagliere di salumi e formaggi', desc: 'selecție mezeluri și brânzeturi italiene', price: '68 lei' },
+      { name: 'Burrata e pomodorini', desc: 'burrata cremoasă, roșii confiate, pesto', price: '42 lei' },
+    ],
+  },
+  {
+    id: 'primi',
+    label: 'Primi',
+    items: [
+      { name: 'Tagliatelle al ragù', desc: 'paste proaspete, ragù de vită gătit lent', price: '46 lei' },
+      { name: 'Cacio e pepe', desc: 'pecorino romano, piper negru, paste tonnarelli', price: '38 lei' },
+      { name: 'Gnocchi al pesto', desc: 'gnocchi de casă, pesto genovese', price: '40 lei' },
+      { name: 'Risotto ai funghi', desc: 'orez carnaroli, ciuperci de pădure, parmezan', price: '48 lei' },
+    ],
+  },
+  {
+    id: 'dalla-brace',
+    label: 'Dalla Brace',
+    note: 'de la grătar pe jar',
+    items: [
+      { name: 'Tagliata di manzo', desc: 'vită maturată, rucola, parmezan, trufe', price: '92 lei' },
+      { name: 'Pollo alla brace', desc: 'pui marinat, copt pe jar, lămâie, rozmarin', price: '54 lei' },
+      { name: 'Branzino al forno', desc: 'biban de mare întreg, ierburi, lămâie', price: '78 lei' },
+    ],
+  },
+  {
+    id: 'pizza',
+    label: 'Pizza',
+    note: 'cuptor cu lemne',
+    items: [
+      { name: 'Margherita', desc: 'roșii San Marzano, mozzarella di bufala, busuioc', price: '38 lei' },
+      { name: 'Diavola', desc: 'salam picant, mozzarella, ardei iute', price: '44 lei' },
+      { name: 'Quattro formaggi', desc: 'patru brânzeturi, miere', price: '46 lei' },
+      { name: 'Prosciutto e funghi', desc: 'prosciutto cotto, ciuperci', price: '44 lei' },
+    ],
+  },
+  {
+    id: 'dolci',
+    label: 'Dolci',
+    items: [
+      { name: 'Tiramisù', desc: 'rețeta casei, mascarpone, espresso', price: '28 lei' },
+      { name: 'Panna cotta', desc: 'vanilie, coulis de fructe de pădure', price: '24 lei' },
+      { name: 'Cannoli siciliani', desc: 'ricotta, fistic', price: '26 lei' },
+    ],
+  },
+];
+
+const navCats = [...categories.map((c) => ({ id: c.id, label: c.label })), { id: 'vini', label: 'Vini' }];
+---
+
+<Base
+  title="Meniu — BRACE Trattoria · Brașov"
+  description="Meniul BRACE: antipasti, paste proaspete, preparate la grătar pe jar, pizza din cuptor cu lemne și dolci. Bucătărie italiană la Brașov."
+>
+  <header class="mx-auto max-w-6xl px-4 pb-6 pt-14 lg:pt-20">
+    <p class="mb-3 text-xs font-medium tracking-[0.22em] text-terracotta">MENIU</p>
+    <h1 class="h1 text-charcoal" data-split>Meniul nostru.</h1>
+    <p class="lead mt-5 max-w-xl text-charcoal/70" data-reveal>
+      Bucătărie italiană făcută cu ingrediente bune și răbdare. Prețurile sunt în lei.
+    </p>
+  </header>
+
+  <div class="mx-auto max-w-6xl px-4">
+    <MenuNav categories={navCats} />
+
+    <div class="mx-auto max-w-3xl pb-10">
+      {categories.map((c) => (
+        <MenuCategory id={c.id} title={c.label} note={c.note} items={c.items} />
+      ))}
+
+      <section id="vini" class="scroll-mt-32 border-t border-charcoal/10 py-12">
+        <h2 class="h2 text-charcoal" data-split>Vini</h2>
+        <p class="lead mt-4 max-w-xl text-charcoal/70" data-reveal>
+          Selecție de vinuri italiene la pahar și sticlă. Întreabă personalul
+          pentru recomandarea zilei.
+        </p>
+      </section>
+    </div>
+  </div>
+</Base>

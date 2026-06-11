@@ -1,0 +1,19 @@
+---
+interface Props {
+  name: string;
+  desc: string;
+  price: string;
+}
+const { name, desc, price } = Astro.props;
+---
+
+<li class="flex items-baseline gap-4 py-4" data-reveal>
+  <div class="min-w-0 flex-1">
+    <h3 class="font-display text-lg text-charcoal">{name}</h3>
+    <p class="mt-1 text-sm text-charcoal/65">{desc}</p>
+  </div>
+  <div class="flex items-baseline gap-3">
+    <span class="hidden flex-1 border-b border-dotted border-charcoal/25 sm:block sm:w-12"></span>
+    <span class="whitespace-nowrap font-medium text-terracotta">{price}</span>
+  </div>
+</li>
