@@ -53,6 +53,10 @@ const restaurantSchema = {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
 
+    {/* preload font display (LCP headline) — nume fixe, fără hash */}
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/playfair-latin-500.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/playfair-latin-ext-500.woff2" crossorigin />
+
     <title>{title}</title>
     <meta name="description" content={description} />
 
