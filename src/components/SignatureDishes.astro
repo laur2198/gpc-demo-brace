@@ -1,0 +1,48 @@
+---
+import Placeholder from './Placeholder.astro';
+
+const dishes = [
+  {
+    slug: 'tagliata',
+    name: 'Tagliata di manzo',
+    desc: 'Vită maturată, friptă pe jar, rucola, parmezan, ulei de trufe.',
+    file: 'dish-tagliata.avif',
+  },
+  {
+    slug: 'pizza',
+    name: 'Pizza alla Brace',
+    desc: 'Cuptor cu lemne, blat copt 48h, mozzarella di bufala.',
+    file: 'dish-pizza.avif',
+  },
+  {
+    slug: 'pasta',
+    name: 'Tagliatelle al ragù',
+    desc: 'Paste proaspete, ragù gătit 6 ore, parmezan reggiano.',
+    file: 'dish-pasta.avif',
+  },
+];
+---
+
+<section class="mx-auto max-w-6xl px-4 py-20 lg:py-28">
+  <div class="mb-12 max-w-2xl">
+    <p class="mb-3 text-xs font-medium tracking-[0.22em] text-terracotta">PREPARATE SEMNĂTURĂ</p>
+    <h2 class="h2 text-charcoal" data-split>Câteva motive să rezervi.</h2>
+  </div>
+
+  <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {dishes.map((d) => (
+      <li class="group" data-reveal>
+        <a href="/meniu/" class="block">
+          <div transition:name={`dish-${d.slug}`}>
+            <Placeholder file={d.file} ratio="4/3" class="transition-transform duration-500 group-hover:scale-[1.02]" />
+          </div>
+          <h3 class="mt-5 font-display text-2xl text-charcoal">{d.name}</h3>
+          <p class="mt-2 text-charcoal/70">{d.desc}</p>
+          <span class="mt-3 inline-block text-sm font-medium text-terracotta transition-colors group-hover:text-ember">
+            Vezi în meniu →
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

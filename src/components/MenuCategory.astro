@@ -1,0 +1,26 @@
+---
+import MenuItem from './MenuItem.astro';
+
+interface Item {
+  name: string;
+  desc: string;
+  price: string;
+}
+interface Props {
+  id: string;
+  title: string;
+  note?: string;
+  items: Item[];
+}
+const { id, title, note, items } = Astro.props;
+---
+
+<section id={id} class="scroll-mt-32 border-t border-charcoal/10 py-12 first:border-t-0">
+  <div class="mb-2 flex flex-wrap items-baseline gap-x-4">
+    <h2 class="h2 text-charcoal" data-split>{title}</h2>
+    {note && <p class="text-sm italic text-charcoal/50">{note}</p>}
+  </div>
+  <ul class="mt-4 divide-y divide-charcoal/5">
+    {items.map((it) => <MenuItem name={it.name} desc={it.desc} price={it.price} />)}
+  </ul>
+</section>

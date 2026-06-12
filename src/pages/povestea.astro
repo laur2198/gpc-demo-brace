@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Placeholder from '../components/Placeholder.astro';
+---
+
+<Base
+  title="Povestea — BRACE Trattoria · Brașov"
+  description="Povestea BRACE: o trattoria italiană născută dintr-o obsesie pentru mâncare făcută cum trebuie, la grătar pe jar și în cuptor cu lemne, la Brașov."
+>
+  <header class="mx-auto max-w-6xl px-4 pb-4 pt-14 lg:pt-24">
+    <p class="mb-3 text-xs font-medium tracking-[0.22em] text-terracotta">POVESTEA</p>
+    <h1 class="h1 max-w-3xl text-charcoal" data-split>Totul pleacă de la foc.</h1>
+  </header>
+
+  <div class="mx-auto max-w-3xl px-4 py-6">
+    <Placeholder file="story.avif" ratio="3/2" class="shadow-2xl shadow-charcoal/20" />
+  </div>
+
+  <div class="mx-auto max-w-5xl px-4">
+    <StoryBlock index="01" eyebrow="ÎNCEPUTUL">
+      BRACE s-a născut dintr-o obsesie simplă: mâncare italiană făcută cum
+      trebuie, în orașul nostru. Fără compromisuri, fără „merge și așa".
+    </StoryBlock>
+
+    <StoryBlock index="02" eyebrow="INGREDIENTELE" flip>
+      Aducem ce e mai bun: făină italiană, roșii San Marzano, mozzarella di
+      bufala, vită maturată. Restul îl face focul și răbdarea.
+    </StoryBlock>
+
+    <StoryBlock index="03" eyebrow="JARUL">
+      Grătarul pe jar și cuptorul cu lemne nu sunt decor. Dau gustul ăla
+      afumat, copt, pe care nu-l poți falsifica cu o tigaie.
+    </StoryBlock>
+
+    <StoryBlock index="04" eyebrow="MASA" flip>
+      Pentru noi, masa e despre oameni. De-aia facem porții generoase, vin bun
+      și un loc în care nu te grăbește nimeni.
+    </StoryBlock>
+
+    <div class="border-t border-charcoal/10 py-16 text-center">
+      <a
+        href="/rezervari/"
+        class="inline-block rounded-full bg-terracotta px-8 py-4 text-sm font-medium text-cream transition-colors hover:bg-ember"
+        data-reveal
+      >
+        Rezervă o masă →
+      </a>
+    </div>
+  </div>
+</Base>

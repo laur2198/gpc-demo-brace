@@ -1,0 +1,25 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<span class={`logo inline-flex items-center gap-2 ${className}`} aria-label="BRACE">
+  {/* mark = scânteie/flacără, 3 linii ascendente */}
+  <svg
+    class="logo-mark h-[0.85em] w-auto shrink-0"
+    viewBox="0 0 24 28"
+    fill="none"
+    aria-hidden="true"
+    role="presentation"
+  >
+    <path
+      d="M11 2 C7 8 14 9 10 16 C16 13 17 20 12 26 C20 23 22 15 17 9 C16 13 14 12 15 8 C13 11 12 7 11 2 Z"
+      fill="currentColor"
+    />
+    <path d="M3 26 L7 18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+    <path d="M21 26 L18 20" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+  </svg>
+  <span class="logo-word font-display font-medium tracking-[0.14em] leading-none">BRACE</span>
+</span>

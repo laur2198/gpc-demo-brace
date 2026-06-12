@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import GalleryGrid from '../components/GalleryGrid.astro';
+---
+
+<Base
+  title="Galerie — BRACE Trattoria · Brașov"
+  description="Galerie foto BRACE: preparate la grătar pe jar, paste proaspete, pizza din cuptor cu lemne și atmosfera trattoriei, la Brașov."
+>
+  <header class="mx-auto max-w-6xl px-4 pb-6 pt-14 lg:pt-20">
+    <p class="mb-3 text-xs font-medium tracking-[0.22em] text-terracotta">GALERIE</p>
+    <h1 class="h1 text-charcoal" data-split>Foc, masă, lumină.</h1>
+  </header>
+
+  <div class="mx-auto max-w-6xl px-4 pb-8">
+    <GalleryGrid />
+  </div>
+
+  <script>
+    import '../scripts/gallery-webgl.js';
+  </script>
+</Base>

@@ -1,0 +1,20 @@
+---
+import Placeholder from './Placeholder.astro';
+---
+
+<section class="relative" data-atmosphere>
+  <div class="relative overflow-hidden">
+    <div data-atmosphere-media>
+      <Placeholder file="atmosphere.avif" ratio="16/9" class="rounded-none !rounded-none" />
+    </div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/30 to-transparent"></div>
+    <div class="absolute inset-0 flex items-end">
+      <div class="mx-auto w-full max-w-6xl px-4 pb-12 lg:pb-16">
+        <p class="max-w-xl font-display text-2xl leading-snug text-cream sm:text-3xl" data-reveal>
+          Lemn, lumină caldă și miros de fum bun. Un loc în care stai mai mult
+          decât ai planificat.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
