@@ -1,35 +1,53 @@
 ---
-import Placeholder from './Placeholder.astro';
+import { Image } from 'astro:assets';
 
-// 8 imagini, layout asimetric. Variază: preparate, detaliu, interior, foc.
-// Swap: înlocuiește <Placeholder> cu <Image> când vin gallery-1..8.avif.
-const items = [
-  { file: 'gallery-1.avif', ratio: '4/3', span: 'sm:col-span-2 lg:col-span-3 lg:row-span-2' },
-  { file: 'gallery-2.avif', ratio: '3/4', span: 'lg:col-span-2 lg:row-span-2' },
-  { file: 'gallery-3.avif', ratio: '1/1', span: 'lg:col-span-1' },
-  { file: 'gallery-4.avif', ratio: '1/1', span: 'lg:col-span-1' },
-  { file: 'gallery-5.avif', ratio: '3/2', span: 'sm:col-span-2 lg:col-span-3' },
-  { file: 'gallery-6.avif', ratio: '1/1', span: 'lg:col-span-2' },
-  { file: 'gallery-7.avif', ratio: '4/3', span: 'lg:col-span-3' },
-  { file: 'gallery-8.avif', ratio: '3/2', span: 'sm:col-span-2 lg:col-span-2' },
+const sources = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.png', { eager: true });
+const get = (name: string) => sources[`/src/assets/images/${name}.png`]?.default;
+
+// 8 dale, layout asimetric. Doar 6 imagini disponibile → reuse pe 2 dale.
+const tiles = [
+  { img: 'gallery-set', ratio: '16/9', span: 'sm:col-span-2 lg:col-span-4', alt: 'Preparate și atmosferă BRACE' },
+  { img: 'hero', ratio: '4/5', span: 'lg:col-span-2', alt: 'Friptură pe jar la BRACE' },
+  { img: 'dish-pizza', ratio: '1/1', span: 'lg:col-span-2', alt: 'Pizza din cuptor cu lemne' },
+  { img: 'dish-pasta', ratio: '1/1', span: 'lg:col-span-2', alt: 'Tagliatelle al ragù' },
+  { img: 'atmosphere', ratio: '1/1', span: 'sm:col-span-2 lg:col-span-2', alt: 'Interiorul trattoriei' },
+  { img: 'story', ratio: '3/2', span: 'sm:col-span-2 lg:col-span-3', alt: 'Gătit pe foc deschis' },
+  { img: 'gallery-set', ratio: '3/2', span: 'sm:col-span-2 lg:col-span-3', alt: 'Selecție de preparate' },
+  { img: 'atmosphere', ratio: '16/6', span: 'sm:col-span-2 lg:col-span-6', alt: 'Ambianța BRACE' },
 ];
 ---
 
 <div
-  class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-6 lg:[grid-auto-rows:minmax(0,1fr)]"
+  class="grid grid-cols-1 items-start gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-6"
   data-gallery
 >
-  {items.map((it) => (
-    <figure
-      class={`group relative overflow-hidden rounded-2xl ${it.span}`}
-      data-gallery-item
-      data-reveal
-    >
-      {/* Placeholder cât timp nu sunt imaginile reale.
-          La swap, devine: <img data-gallery-img src=... /> + fallback CSS scale. */}
-      <div class="h-full transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:group-hover:scale-100">
-        <Placeholder file={it.file} ratio={it.ratio} class="h-full !rounded-2xl" />
-      </div>
-    </figure>
-  ))}
+  {tiles.map((t) => {
+    const asset = get(t.img);
+    return (
+      <figure class={`group relative overflow-hidden rounded-2xl ${t.span}`} data-gallery-item data-reveal>
+        <div
+          class="relative h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
+          style={`aspect-ratio:${t.ratio}`}
+        >
+          {asset ? (
+            <Image
+              src={asset}
+              alt={t.alt}
+              widths={[400, 800, 1152]}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
+              format="avif"
+              loading="lazy"
+              decoding="async"
+              class="absolute inset-0 h-full w-full object-cover"
+              data-gallery-img
+            />
+          ) : (
+            <div class="absolute inset-0 grid place-items-center bg-gradient-to-br from-charcoal via-charcoal to-terracotta text-cream/40">
+              <span class="font-mono text-[0.7rem]">{t.img}.avif</span>
+            </div>
+          )}
+        </div>
+      </figure>
+    );
+  })}
 </div>

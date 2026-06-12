@@ -1,26 +1,73 @@
 ---
-// Placeholder cu aspect-ratio corect până vin imaginile reale.
-// Swap: înlocuiește cu <Image src=... /> din public/images/.
+import { Picture } from 'astro:assets';
+
+// Randează imaginea reală optimizată (AVIF/WebP) când există asset-ul în
+// src/assets/images/, altfel un placeholder gradient cu numele fișierului.
 interface Props {
   file: string;
   ratio?: string; // ex. "16/9", "4/3", "3/2"
   eager?: boolean;
+  sizes?: string;
+  alt?: string;
   class?: string;
 }
-const { file, ratio = '16/9', class: className = '' } = Astro.props;
+const {
+  file,
+  ratio = '16/9',
+  eager = false,
+  sizes = '(max-width: 768px) 100vw, 600px',
+  alt,
+  class: className = '',
+} = Astro.props;
+
+const sources = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.png', { eager: true });
+const get = (name: string) => sources[`/src/assets/images/${name}.png`]?.default;
+
+// slot cerut → asset real (reuse unde lipsesc imagini dedicate)
+const key = file.replace(/\.[a-z0-9]+$/i, '');
+const map: Record<string, string> = {
+  hero: 'hero',
+  'dish-pizza': 'dish-pizza',
+  'dish-pasta': 'dish-pasta',
+  'dish-tagliata': 'hero', // nu avem imagine dedicată de tagliata → friptură pe jar
+  atmosphere: 'atmosphere',
+  story: 'story',
+};
+const asset = get(map[key] ?? key);
+const altText = alt ?? `BRACE — ${key.replace(/-/g, ' ')}`;
 ---
 
-<div
-  class={`relative grid place-items-center overflow-hidden rounded-2xl bg-gradient-to-br from-charcoal via-charcoal to-terracotta text-cream/40 ${className}`}
-  style={`aspect-ratio:${ratio}`}
-  role="img"
-  aria-label={`Imagine: ${file}`}
->
-  <div class="flex flex-col items-center gap-1 text-center">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="opacity-50">
-      <path d="M4 16l4-5 3 4 4-6 5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="8" cy="8" r="1.6" fill="currentColor"/>
-    </svg>
-    <span class="font-mono text-[0.7rem] tracking-wide">{file}</span>
+{asset ? (
+  <div
+    class={`relative overflow-hidden rounded-2xl ${className}`}
+    style={`aspect-ratio:${ratio}`}
+  >
+    <Picture
+      src={asset}
+      formats={['avif', 'webp']}
+      fallbackFormat="webp"
+      widths={[400, 800, 1152]}
+      sizes={sizes}
+      alt={altText}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding={eager ? 'auto' : 'async'}
+      class="absolute inset-0 h-full w-full object-cover"
+      {...(eager ? { fetchpriority: 'high' } : {})}
+    />
   </div>
-</div>
+) : (
+  <div
+    class={`relative grid place-items-center overflow-hidden rounded-2xl bg-gradient-to-br from-charcoal via-charcoal to-terracotta text-cream/40 ${className}`}
+    style={`aspect-ratio:${ratio}`}
+    role="img"
+    aria-label={`Imagine: ${file}`}
+  >
+    <div class="flex flex-col items-center gap-1 text-center">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="opacity-50">
+        <path d="M4 16l4-5 3 4 4-6 5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="8" cy="8" r="1.6" fill="currentColor" />
+      </svg>
+      <span class="font-mono text-[0.7rem] tracking-wide">{file}</span>
+    </div>
+  </div>
+)}
