@@ -171,6 +171,46 @@ footer{background:var(--ink);color:rgba(244,236,225,.7);padding-top:clamp(3rem,6
 .foot-col a:hover{color:var(--cream)}
 .foot-bottom{border-top:1px solid rgba(244,236,225,.12);padding-top:1.6rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:rgba(244,236,225,.5)}
 
+/* ============ MENIU ============ */
+.menu-nav{position:sticky;top:0;z-index:40;background:var(--cream);border-bottom:1px solid rgba(36,26,18,.12)}
+.menu-nav ul{display:flex;gap:.3rem;overflow-x:auto;max-width:1280px;margin:0 auto;padding:.9rem clamp(1.5rem,5vw,4rem);
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;list-style:none;scrollbar-width:none}
+.menu-nav ul::-webkit-scrollbar{display:none}
+.menu-nav a{white-space:nowrap;color:rgba(36,26,18,.6);text-decoration:none;padding:.5rem .85rem;border-radius:999px;transition:color .2s,background .2s}
+.menu-nav a:hover{color:var(--terracotta);background:rgba(181,83,42,.08)}
+.menu-cats{max-width:48rem;margin:0 auto}
+.menu-cat{padding:clamp(2.5rem,5vw,4rem) 0;border-top:1px solid rgba(36,26,18,.1);scroll-margin-top:4.5rem}
+.menu-cat:first-child{border-top:0;padding-top:0}
+.menu-cat>.eyebrow{color:var(--terracotta);display:block;margin-bottom:.7rem}
+.menu-cat h2{font-size:clamp(1.8rem,4vw,2.8rem);color:var(--charcoal);position:relative;padding-bottom:.85rem;margin-bottom:1.4rem;display:flex;align-items:baseline;flex-wrap:wrap}
+.menu-cat h2::after{content:"";position:absolute;left:0;bottom:0;width:64px;height:2px;background:var(--terracotta)}
+.menu-cat h2 .note{font-family:var(--mono);font-size:.66rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-left:.7rem}
+.menu-item{display:flex;gap:1.2rem;align-items:baseline;padding:1rem 0;border-bottom:1px solid rgba(36,26,18,.06)}
+.menu-item .mi-main{flex:1;min-width:0}
+.menu-item .mi-name{font-family:var(--display);font-size:1.22rem;color:var(--charcoal)}
+.menu-item .mi-desc{font-size:.92rem;line-height:1.55;color:#6b5d4e;margin-top:.2rem}
+.menu-item .mi-price{font-family:var(--mono);font-size:.82rem;color:var(--terracotta);white-space:nowrap;letter-spacing:.04em}
+.menu-vini p{max-width:42rem;font-size:1.05rem;line-height:1.7;color:#6b5d4e}
+
+/* ============ POVESTEA — blocuri editoriale ============ */
+.story-blocks{max-width:62rem;margin:0 auto}
+.sblock{display:flex;gap:clamp(1.5rem,4vw,3.5rem);align-items:flex-start;padding:clamp(2.5rem,6vw,5rem) 0}
+.sblock+.sblock{border-top:1px solid rgba(244,236,225,.1)}
+.sblock.flip{flex-direction:row-reverse}
+.sb-label{flex:0 0 26%}
+.sb-label .eyebrow{color:var(--ember);display:block;margin-bottom:.7rem}
+.sb-label .num{font-family:var(--display);font-size:clamp(2.6rem,6vw,4.5rem);color:rgba(244,236,225,.16);line-height:1}
+.sb-body{flex:1;font-family:var(--display);font-weight:400;font-size:clamp(1.3rem,2.6vw,2rem);line-height:1.42;color:rgba(244,236,225,.9)}
+.sb-body em{color:var(--ember)}
+.story-cta{text-align:center;padding-top:clamp(2rem,5vw,3.5rem)}
+
+/* ============ GALERIE — pagină (8 imagini) ============ */
+.gal-grid.eight .imgph{width:100%}
+.gp1{grid-column:1/7}.gp2{grid-column:8/13;align-self:end}
+.gp3{grid-column:1/5}.gp4{grid-column:6/13}
+.gp5{grid-column:1/7}.gp6{grid-column:8/13;align-self:end}
+.gp7{grid-column:1/6}.gp8{grid-column:7/13}
+
 /* ============ REVEAL + ANIMAȚII ============ */
 [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
 [data-reveal].in{opacity:1;transform:none}
@@ -184,6 +224,9 @@ footer{background:var(--ink);color:rgba(244,236,225,.7);padding-top:clamp(3rem,6
   .dishes{grid-template-columns:1fr;gap:2.5rem}
   .story{grid-template-columns:1fr;gap:2rem}
   .g1,.g2,.g3,.g4,.g5{grid-column:1/13}
+  .gp1,.gp2,.gp3,.gp4,.gp5,.gp6,.gp7,.gp8{grid-column:1/13}
+  .sblock,.sblock.flip{flex-direction:column;gap:1rem}
+  .sb-label{flex:none}
   .scrollcue{display:none}
 }
 @media (prefers-reduced-motion:reduce){
