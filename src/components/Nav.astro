@@ -8,69 +8,40 @@ const links = [
   { href: '/galerie/', label: 'Galerie' },
   { href: '/rezervari/', label: 'Rezervări' },
 ];
-
 const path = Astro.url.pathname;
-const isActive = (href: string) =>
-  href === '/' ? path === '/' : path.startsWith(href);
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 
-<header class="sticky top-0 z-40 border-b border-charcoal/10 bg-cream/85 backdrop-blur-md">
-  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5" aria-label="Navigație principală">
-    <a href="/" class="text-charcoal text-xl" aria-label="BRACE — acasă">
-      <Logo />
-    </a>
+<nav class="nav" aria-label="Navigație principală">
+  <Logo />
+  <div class="navlinks">
+    {links.map((l) => (
+      <a href={l.href} class:list={[isActive(l.href) && 'active']} aria-current={isActive(l.href) ? 'page' : undefined}>
+        {l.label}
+      </a>
+    ))}
+  </div>
+  <a href="/rezervari/" class="nav-cta">Rezervă o masă</a>
 
-    <ul class="hidden items-center gap-7 text-sm md:flex">
+  {/* mobil: meniu prin <details>, fără JS */}
+  <details class="navtoggle" style="position:relative">
+    <summary aria-label="Deschide meniul" style="list-style:none;cursor:pointer;color:var(--cream);display:flex;align-items:center;height:40px;width:40px;justify-content:center">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+    </summary>
+    <ul style="position:absolute;right:0;top:46px;background:var(--charcoal);border:1px solid rgba(244,236,225,.15);border-radius:12px;padding:.5rem;min-width:13rem;list-style:none;z-index:60">
       {links.map((l) => (
         <li>
           <a
             href={l.href}
-            class:list={[
-              'transition-colors hover:text-terracotta',
-              isActive(l.href) ? 'text-terracotta font-medium' : 'text-charcoal/80',
-            ]}
+            style="display:block;padding:.7rem .9rem;color:var(--cream);text-decoration:none;font-size:.9rem;border-radius:8px"
             aria-current={isActive(l.href) ? 'page' : undefined}
           >
             {l.label}
           </a>
         </li>
       ))}
-      <li>
-        <a
-          href="/rezervari/"
-          class="rounded-full bg-terracotta px-4 py-2 text-cream transition-colors hover:bg-ember"
-        >
-          Rezervă o masă
-        </a>
-      </li>
     </ul>
-
-    {/* mobil: toggle prin <details>, fără JS */}
-    <details class="group relative md:hidden">
-      <summary
-        class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-md text-charcoal"
-        aria-label="Deschide meniul"
-      >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-        </svg>
-      </summary>
-      <ul class="absolute right-0 top-12 w-52 rounded-xl border border-charcoal/10 bg-cream p-2 shadow-xl">
-        {links.map((l) => (
-          <li>
-            <a
-              href={l.href}
-              class:list={[
-                'block rounded-lg px-3 py-2.5 text-sm transition-colors hover:bg-charcoal/5',
-                isActive(l.href) ? 'text-terracotta font-medium' : 'text-charcoal',
-              ]}
-              aria-current={isActive(l.href) ? 'page' : undefined}
-            >
-              {l.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </details>
-  </nav>
-</header>
+  </details>
+</nav>

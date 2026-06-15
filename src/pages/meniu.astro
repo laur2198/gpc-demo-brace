@@ -1,12 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
-import MenuNav from '../components/MenuNav.astro';
-import MenuCategory from '../components/MenuCategory.astro';
 
 const categories = [
   {
-    id: 'antipasti',
-    label: 'Antipasti',
+    id: 'antipasti', label: 'Antipasti',
     items: [
       { name: 'Bruschette al pomodoro', desc: 'roșii, busuioc, usturoi, ulei extravirgin', price: '24 lei' },
       { name: 'Tagliere di salumi e formaggi', desc: 'selecție mezeluri și brânzeturi italiene', price: '68 lei' },
@@ -14,8 +11,7 @@ const categories = [
     ],
   },
   {
-    id: 'primi',
-    label: 'Primi',
+    id: 'primi', label: 'Primi',
     items: [
       { name: 'Tagliatelle al ragù', desc: 'paste proaspete, ragù de vită gătit lent', price: '46 lei' },
       { name: 'Cacio e pepe', desc: 'pecorino romano, piper negru, paste tonnarelli', price: '38 lei' },
@@ -24,9 +20,7 @@ const categories = [
     ],
   },
   {
-    id: 'dalla-brace',
-    label: 'Dalla Brace',
-    note: 'de la grătar pe jar',
+    id: 'dalla-brace', label: 'Dalla Brace', note: 'de la grătar pe jar',
     items: [
       { name: 'Tagliata di manzo', desc: 'vită maturată, rucola, parmezan, trufe', price: '92 lei' },
       { name: 'Pollo alla brace', desc: 'pui marinat, copt pe jar, lămâie, rozmarin', price: '54 lei' },
@@ -34,9 +28,7 @@ const categories = [
     ],
   },
   {
-    id: 'pizza',
-    label: 'Pizza',
-    note: 'cuptor cu lemne',
+    id: 'pizza', label: 'Pizza', note: 'cuptor cu lemne',
     items: [
       { name: 'Margherita', desc: 'roșii San Marzano, mozzarella di bufala, busuioc', price: '38 lei' },
       { name: 'Diavola', desc: 'salam picant, mozzarella, ardei iute', price: '44 lei' },
@@ -45,8 +37,7 @@ const categories = [
     ],
   },
   {
-    id: 'dolci',
-    label: 'Dolci',
+    id: 'dolci', label: 'Dolci',
     items: [
       { name: 'Tiramisù', desc: 'rețeta casei, mascarpone, espresso', price: '28 lei' },
       { name: 'Panna cotta', desc: 'vanilie, coulis de fructe de pădure', price: '24 lei' },
@@ -54,22 +45,14 @@ const categories = [
     ],
   },
 ];
-
 const navCats = [...categories.map((c) => ({ id: c.id, label: c.label })), { id: 'vini', label: 'Vini' }];
 
-// JSON-LD Menu light — semnal de capabilitate SEO.
 const menuSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Menu',
-  name: 'Meniu BRACE Trattoria',
-  inLanguage: 'ro',
+  '@context': 'https://schema.org', '@type': 'Menu', name: 'Meniu BRACE Trattoria', inLanguage: 'ro',
   hasMenuSection: categories.map((c) => ({
-    '@type': 'MenuSection',
-    name: c.label,
+    '@type': 'MenuSection', name: c.label,
     hasMenuItem: c.items.map((it) => ({
-      '@type': 'MenuItem',
-      name: it.name,
-      description: it.desc,
+      '@type': 'MenuItem', name: it.name, description: it.desc,
       offers: { '@type': 'Offer', price: it.price.replace(/\D/g, ''), priceCurrency: 'RON' },
     })),
   })),
@@ -82,29 +65,46 @@ const menuSchema = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(menuSchema)} />
 
-  <header class="mx-auto max-w-6xl px-4 pb-6 pt-14 lg:pt-20">
-    <p class="mb-3 text-xs font-medium tracking-[0.22em] text-terracotta">MENIU</p>
-    <h1 class="h1 text-charcoal" data-split>Meniul nostru.</h1>
-    <p class="lead mt-5 max-w-xl text-charcoal/70" data-reveal>
-      Bucătărie italiană făcută cu ingrediente bune și răbdare. Prețurile sunt în lei.
-    </p>
+  {/* header dark scurt */}
+  <header class="page-head">
+    <div class="scene short" aria-hidden="true"></div>
+    <span class="eyebrow" data-reveal>Meniu</span>
+    <h1 data-reveal>Tot ce iese <em>de la foc.</em></h1>
   </header>
 
-  <div class="mx-auto max-w-6xl px-4">
-    <MenuNav categories={navCats} />
+  {/* nav categorii sticky */}
+  <nav class="menu-nav" aria-label="Categorii meniu">
+    <ul>
+      {navCats.map((c) => <li><a href={`#${c.id}`}>{c.label}</a></li>)}
+    </ul>
+  </nav>
 
-    <div class="mx-auto max-w-3xl pb-10">
-      {categories.map((c) => (
-        <MenuCategory id={c.id} title={c.label} note={c.note} items={c.items} />
-      ))}
+  {/* corp pe crem */}
+  <section class="light sec">
+    <div class="wrap">
+      <div class="menu-cats">
+        {categories.map((c) => (
+          <div class="menu-cat" id={c.id} data-reveal>
+            <span class="eyebrow">{c.label}</span>
+            <h2>{c.label}{c.note && <span class="note">{c.note}</span>}</h2>
+            {c.items.map((it) => (
+              <div class="menu-item">
+                <div class="mi-main">
+                  <div class="mi-name">{it.name}</div>
+                  <div class="mi-desc">{it.desc}</div>
+                </div>
+                <div class="mi-price">{it.price}</div>
+              </div>
+            ))}
+          </div>
+        ))}
 
-      <section id="vini" class="scroll-mt-32 border-t border-charcoal/10 py-12">
-        <h2 class="h2 text-charcoal" data-split>Vini</h2>
-        <p class="lead mt-4 max-w-xl text-charcoal/70" data-reveal>
-          Selecție de vinuri italiene la pahar și sticlă. Întreabă personalul
-          pentru recomandarea zilei.
-        </p>
-      </section>
+        <div class="menu-cat menu-vini" id="vini" data-reveal>
+          <span class="eyebrow">Vini</span>
+          <h2>Vini</h2>
+          <p>Selecție de vinuri italiene la pahar și sticlă. Întreabă personalul pentru recomandarea zilei.</p>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 </Base>

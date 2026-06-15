@@ -1,20 +1,119 @@
 ---
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
-import SignatureDishes from '../components/SignatureDishes.astro';
-import StorySnippet from '../components/StorySnippet.astro';
-import Atmosphere from '../components/Atmosphere.astro';
-import Testimonial from '../components/Testimonial.astro';
-import ReservationCTA from '../components/ReservationCTA.astro';
-import HoursLocation from '../components/HoursLocation.astro';
+import Figure from '../components/Figure.astro';
 ---
 
 <Base>
-  <Hero />
-  <SignatureDishes />
-  <StorySnippet />
-  <Atmosphere />
-  <Testimonial />
-  <ReservationCTA />
-  <HoursLocation />
+  {/* ============ HERO ============ */}
+  <section class="hero">
+    <div class="scene" aria-hidden="true"></div>
+    <div class="hero-body">
+      <div class="hero-inner">
+        <span class="eyebrow" data-reveal>Cucina italiana · la grătar pe jar · Brașov</span>
+        <h1 data-reveal>Gust adevărat,<br />copt <em>pe foc.</em></h1>
+        <p class="sub" data-reveal>
+          Paste făcute în casă, carne pe jar și pizza din cuptor cu lemne.
+          Rețete italiene, fără scurtături.
+        </p>
+        <div class="cta-row" data-reveal>
+          <a href="/rezervari/" class="btn btn-primary">Rezervă o masă →</a>
+          <a href="/meniu/" class="btn btn-ghost">Vezi meniul</a>
+        </div>
+      </div>
+    </div>
+    <div class="infobar">
+      <div class="group">
+        <span><span class="lbl">Unde</span>Str. Mureșenilor 8, Brașov</span>
+        <span><span class="lbl">Program</span>Mar–Dum · 12:00–23:00</span>
+      </div>
+      <div class="scrollcue"><span>Scroll</span><span class="line"></span></div>
+    </div>
+  </section>
+
+  {/* ============ PREPARATE SEMNĂTURĂ (cream) ============ */}
+  <section class="light sec">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow">Preparate semnătură</span>
+        <h2>Trei feluri care <em>ne definesc.</em></h2>
+      </div>
+      <div class="dishes">
+        <article class="dish" data-reveal>
+          <Figure img="dish-tagliata" cls="r43" cap="Foto — Tagliata di manzo" />
+          <div class="name">Tagliata di manzo</div>
+          <p class="desc">Vită maturată, friptă pe jar, rucola, parmezan și ulei de trufe.</p>
+          <div class="price">92 lei</div>
+        </article>
+        <article class="dish" data-reveal>
+          <Figure img="dish-pizza" cls="r43" cap="Foto — Pizza alla Brace" />
+          <div class="name">Pizza alla Brace</div>
+          <p class="desc">Cuptor cu lemne, blat copt 48h, mozzarella di bufala, busuioc.</p>
+          <div class="price">de la 38 lei</div>
+        </article>
+        <article class="dish" data-reveal>
+          <Figure img="dish-pasta" cls="r43" cap="Foto — Tagliatelle al ragù" />
+          <div class="name">Tagliatelle al ragù</div>
+          <p class="desc">Paste proaspete, ragù de vită gătit 6 ore, parmezan reggiano.</p>
+          <div class="price">46 lei</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ POVESTEA (dark) ============ */}
+  <section class="dark sec">
+    <div class="wrap">
+      <div class="story">
+        <div data-reveal>
+          <span class="eyebrow">Povestea</span>
+          <h2 style="margin-top:1rem">Totul pleacă <em>de la foc.</em></h2>
+        </div>
+        <div data-reveal>
+          <p class="lead">
+            La BRACE totul pleacă de la jar. Gătim simplu, cu ingrediente bune și
+            răbdare — așa cum se face în trattoriile din care ne-am inspirat.
+          </p>
+          <p class="lead">
+            Fără congelat, fără semipreparate, fără grabă. Grătarul pe jar și
+            cuptorul cu lemne nu sunt decor — dau gustul afumat pe care nu-l poți falsifica.
+          </p>
+          <a href="/povestea/" class="link">Citește povestea →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ GALERIE editorială (dark, full-width) ============ */}
+  <section class="dark gallery">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Galerie</span>
+      <h2>Din <em>bucătărie.</em></h2>
+    </div>
+    <div class="gal-grid">
+      <Figure img="story" cls="r43 g1" cap="Grătar pe jar" reveal />
+      <Figure img="dish-pizza" cls="r34 g2" cap="Pizza napoletană" reveal />
+      <Figure img="gallery-1" cls="r34 g3" cap="Vin · detaliu" reveal />
+      <Figure img="atmosphere" cls="r169 g4" cap="Interior · lumină caldă" reveal />
+      <Figure img="dish-pasta" cls="r169 g5" cap="Paste · ragù" reveal />
+    </div>
+  </section>
+
+  {/* ============ TESTIMONIAL (cream2) ============ */}
+  <section class="light2 sec">
+    <div class="wrap">
+      <div class="quote" data-reveal>
+        <div class="stars">★★★★★</div>
+        <blockquote>„Cea mai bună paste din oraș, fără discuție. Te simți ca într-o trattoria din Toscana."</blockquote>
+        <cite>— Andrei P.</cite>
+      </div>
+    </div>
+  </section>
+
+  {/* ============ REZERVARE CTA (terracotta) ============ */}
+  <section class="cta-band">
+    <div class="wrap" data-reveal>
+      <h2>Locurile bune <em>se ocupă repede.</em></h2>
+      <a href="/rezervari/" class="btn btn-primary">Rezervă o masă →</a>
+    </div>
+  </section>
 </Base>
