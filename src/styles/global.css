@@ -113,7 +113,7 @@ em{font-style:italic;font-weight:400}
 .page-head{position:relative;overflow:hidden;isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;min-height:50svh;padding:0 clamp(1.5rem,5vw,4rem) clamp(2.5rem,5vw,3.5rem)}
 .page-head .eyebrow{color:var(--ember);margin-bottom:1.1rem;display:block}
 .page-head h1{font-size:clamp(2.6rem,7vw,5rem);color:var(--cream)}
-.page-head h1 em{color:var(--ember);text-shadow:0 0 38px rgba(255,126,46,.4)}
+.page-head h1 em{color:var(--ember)} /* fără glow — glow ember rămâne DOAR pe hero (Acasă) */
 
 /* ============ FIGURI IMAGINE ============ */
 .imgph{position:relative;border-radius:14px;overflow:hidden;background:
@@ -211,6 +211,27 @@ footer{background:var(--ink);color:rgba(244,236,225,.7);padding-top:clamp(3rem,6
 .gp5{grid-column:1/7}.gp6{grid-column:8/13;align-self:end}
 .gp7{grid-column:1/6}.gp8{grid-column:7/13}
 
+/* ============ REZERVĂRI ============ */
+.rez-layout{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:start}
+.form{display:flex;flex-direction:column;gap:1.1rem}
+.frow{display:grid;gap:1.1rem}
+.frow.two{grid-template-columns:1fr 1fr}
+.frow.three{grid-template-columns:1fr 1fr 1fr}
+.field label{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem}
+.field input,.field textarea{width:100%;background:transparent;border:1px solid rgba(36,26,18,.25);border-radius:10px;padding:.8rem .9rem;font-family:var(--body);font-size:.95rem;color:var(--charcoal);transition:border-color .2s}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--ember)}
+.form .btn-primary{align-self:flex-start;margin-top:.4rem}
+.form-note{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:#6b5d4e;background:rgba(217,122,52,.12);border:1px solid rgba(217,122,52,.35);border-radius:10px;padding:.75rem .9rem}
+.rez-aside{display:flex;flex-direction:column;gap:1.6rem}
+.rez-aside h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--terracotta);margin-bottom:.8rem}
+.rez-aside .blk p,.rez-aside .blk a{display:block;font-size:.95rem;color:var(--charcoal);text-decoration:none;margin-bottom:.35rem}
+.rez-aside .blk a:hover{color:var(--terracotta)}
+.map-ph{position:relative;display:block;border-radius:14px;overflow:hidden;aspect-ratio:4/3;text-decoration:none;
+  background:radial-gradient(80% 60% at 50% 120%,rgba(217,122,52,.4),transparent 60%),linear-gradient(160deg,#2c211a,#141019)}
+.map-ph .mp-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:rgba(244,236,225,.85)}
+.map-ph .mp-inner span{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em}
+.map-ph .mp-inner .mp-sub{color:rgba(244,236,225,.55);font-size:.66rem}
+
 /* ============ REVEAL + ANIMAȚII ============ */
 [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
 [data-reveal].in{opacity:1;transform:none}
@@ -227,6 +248,8 @@ footer{background:var(--ink);color:rgba(244,236,225,.7);padding-top:clamp(3rem,6
   .gp1,.gp2,.gp3,.gp4,.gp5,.gp6,.gp7,.gp8{grid-column:1/13}
   .sblock,.sblock.flip{flex-direction:column;gap:1rem}
   .sb-label{flex:none}
+  .frow.two,.frow.three{grid-template-columns:1fr}
+  .rez-layout{grid-template-columns:1fr;gap:2.5rem}
   .scrollcue{display:none}
 }
 @media (prefers-reduced-motion:reduce){

@@ -1,85 +1,49 @@
 ---
-// FORMSPREE: înlocuiește PLACEHOLDER cu ID-ul real al formularului.
+// FORMSPREE: înlocuiește PLACEHOLDER cu ID-ul real (NU mjgznoda — ăla e GPC).
 const FORMSPREE_ID = 'PLACEHOLDER';
 const action = `https://formspree.io/f/${FORMSPREE_ID}`;
 ---
 
-<form
-  action={action}
-  method="POST"
-  class="space-y-5"
-  data-reveal
->
-  {/* Marcaj clar: formularul e neactiv până la configurarea Formspree. */}
+<form action={action} method="POST" class="form" data-reveal>
   {FORMSPREE_ID === 'PLACEHOLDER' && (
-    <p class="rounded-lg border border-ember/40 bg-ember/10 px-4 py-3 text-sm text-charcoal/80">
-      ⚙️ <strong>Demo:</strong> formularul devine activ după ce se setează ID-ul Formspree.
-    </p>
+    <p class="form-note">⚙ Demo — formularul devine activ după ce se setează ID-ul Formspree real.</p>
   )}
 
-  <div class="grid gap-5 sm:grid-cols-2">
-    <label class="block">
-      <span class="mb-1.5 block text-sm font-medium text-charcoal">Nume</span>
-      <input
-        type="text" name="nume" required autocomplete="name"
-        class="w-full rounded-lg border border-charcoal/20 bg-cream px-4 py-2.5 outline-none transition-colors focus:border-terracotta"
-      />
-    </label>
-    <label class="block">
-      <span class="mb-1.5 block text-sm font-medium text-charcoal">Telefon</span>
-      <input
-        type="tel" name="telefon" required autocomplete="tel"
-        class="w-full rounded-lg border border-charcoal/20 bg-cream px-4 py-2.5 outline-none transition-colors focus:border-terracotta"
-      />
-    </label>
+  <div class="frow two">
+    <div class="field">
+      <label for="nume">Nume</label>
+      <input id="nume" type="text" name="nume" required autocomplete="name" />
+    </div>
+    <div class="field">
+      <label for="telefon">Telefon</label>
+      <input id="telefon" type="tel" name="telefon" required autocomplete="tel" />
+    </div>
   </div>
 
-  <label class="block">
-    <span class="mb-1.5 block text-sm font-medium text-charcoal">Email</span>
-    <input
-      type="email" name="email" required autocomplete="email"
-      class="w-full rounded-lg border border-charcoal/20 bg-cream px-4 py-2.5 outline-none transition-colors focus:border-terracotta"
-    />
-  </label>
-
-  <div class="grid gap-5 sm:grid-cols-3">
-    <label class="block">
-      <span class="mb-1.5 block text-sm font-medium text-charcoal">Data</span>
-      <input
-        type="date" name="data" required
-        class="w-full rounded-lg border border-charcoal/20 bg-cream px-4 py-2.5 outline-none transition-colors focus:border-terracotta"
-      />
-    </label>
-    <label class="block">
-      <span class="mb-1.5 block text-sm font-medium text-charcoal">Ora</span>
-      <input
-        type="time" name="ora" required min="12:00" max="23:00"
-        class="w-full rounded-lg border border-charcoal/20 bg-cream px-4 py-2.5 outline-none transition-colors focus:border-terracotta"
-      />
-    </label>
-    <label class="block">
-      <span class="mb-1.5 block text-sm font-medium text-charcoal">Nr. persoane</span>
-      <input
-        type="number" name="persoane" required min="1" max="8" value="2"
-        class="w-full rounded-lg border border-charcoal/20 bg-cream px-4 py-2.5 outline-none transition-colors focus:border-terracotta"
-      />
-    </label>
+  <div class="field">
+    <label for="email">Email</label>
+    <input id="email" type="email" name="email" required autocomplete="email" />
   </div>
 
-  <label class="block">
-    <span class="mb-1.5 block text-sm font-medium text-charcoal">
-      Mesaj <span class="font-normal text-charcoal/50">(opțional)</span>
-    </span>
-    <textarea
-      name="mesaj" rows="3"
-      class="w-full rounded-lg border border-charcoal/20 bg-cream px-4 py-2.5 outline-none transition-colors focus:border-terracotta"
-    ></textarea>
-  </label>
+  <div class="frow three">
+    <div class="field">
+      <label for="data">Data</label>
+      <input id="data" type="date" name="data" required />
+    </div>
+    <div class="field">
+      <label for="ora">Ora</label>
+      <input id="ora" type="time" name="ora" required min="12:00" max="23:00" />
+    </div>
+    <div class="field">
+      <label for="persoane">Persoane</label>
+      <input id="persoane" type="number" name="persoane" required min="1" max="8" value="2" />
+    </div>
+  </div>
 
-  <button
-    type="submit"
-    class="w-full rounded-full bg-terracotta px-7 py-3.5 text-sm font-medium text-cream transition-colors hover:bg-ember sm:w-auto"
-  >
-    Trimite rezervarea
-  </button>
+  <div class="field">
+    <label for="mesaj">Mesaj (opțional)</label>
+    <textarea id="mesaj" name="mesaj" rows="3"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Trimite rezervarea →</button>
 </form>

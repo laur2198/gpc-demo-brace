@@ -1,69 +1,55 @@
 ---
 import Base from '../layouts/Base.astro';
 import ReservationForm from '../components/ReservationForm.astro';
+
+const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=Str.+Mure%C8%99enilor+8+Bra%C8%99ov';
 ---
 
 <Base
   title="Rezervări — BRACE Trattoria · Brașov"
   description="Rezervă o masă la BRACE Trattoria, Brașov. Marți–Duminică, 12:00–23:00. Pentru grupuri peste 8 persoane, sună-ne direct."
 >
-  <header class="mx-auto max-w-6xl px-4 pb-4 pt-14 lg:pt-20">
-    <p class="mb-3 text-xs font-medium tracking-[0.22em] text-terracotta">REZERVĂRI</p>
-    <h1 class="h1 max-w-2xl text-charcoal" data-split>Rezervă o masă la BRACE.</h1>
-    <p class="lead mt-5 max-w-xl text-charcoal/70" data-reveal>
-      Te așteptăm. Pentru grupuri peste 8 persoane, sună-ne direct.
-    </p>
+  <header class="page-head">
+    <div class="scene short" aria-hidden="true"></div>
+    <span class="eyebrow" data-reveal>Rezervări</span>
+    <h1 data-reveal>Rezervă o masă <em>la BRACE.</em></h1>
   </header>
 
-  <div class="mx-auto grid max-w-6xl gap-12 px-4 py-10 lg:grid-cols-[1.4fr_1fr]">
-    <div>
-      <ReservationForm />
-    </div>
+  <section class="light sec">
+    <div class="wrap">
+      <p class="lead" style="max-width:40rem;margin-bottom:clamp(2rem,4vw,3rem);color:#6b5d4e;font-size:1.1rem;line-height:1.7" data-reveal>
+        Te așteptăm. Pentru grupuri peste 8 persoane, sună-ne direct.
+      </p>
 
-    <aside class="space-y-8">
-      <div class="rounded-2xl border border-charcoal/10 bg-cream p-6" data-reveal>
-        <h2 class="mb-4 font-display text-xl text-charcoal">Contact</h2>
-        <ul class="space-y-3 text-sm">
-          <li class="flex items-center gap-3">
-            <span class="text-terracotta">Tel</span>
-            <a href="tel:+40700000000" class="text-charcoal/80 transition-colors hover:text-terracotta">0700 000 000</a>
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="text-terracotta">WhatsApp</span>
-            <a href="https://wa.me/40700000000" class="text-charcoal/80 transition-colors hover:text-terracotta" rel="noopener">wa.me/40700000000</a>
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="text-terracotta">Adresă</span>
-            <span class="text-charcoal/80">Str. Mureșenilor 8, Brașov</span>
-          </li>
-        </ul>
-      </div>
+      <div class="rez-layout">
+        <ReservationForm />
 
-      <div class="rounded-2xl border border-charcoal/10 bg-cream p-6" data-reveal>
-        <h2 class="mb-4 font-display text-xl text-charcoal">Program</h2>
-        <p class="text-charcoal/80">Marți–Duminică · 12:00–23:00</p>
-        <p class="mt-1 text-charcoal/60">Luni închis</p>
-      </div>
-
-      {/* Hartă: link static spre Maps — NU încărcăm Google Maps JS (overhead + GDPR). */}
-      <a
-        href="https://www.google.com/maps/search/?api=1&query=Str.+Mure%C8%99enilor+8+Bra%C8%99ov"
-        target="_blank"
-        rel="noopener"
-        class="group relative block overflow-hidden rounded-2xl border border-charcoal/10"
-        data-reveal
-      >
-        <div class="grid aspect-[4/3] place-items-center bg-gradient-to-br from-sage/30 via-cream to-terracotta/20">
-          <div class="flex flex-col items-center gap-2 text-charcoal/70">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-              <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6" />
-            </svg>
-            <span class="text-sm font-medium">Vezi pe hartă →</span>
-            <span class="text-xs text-charcoal/50">Str. Mureșenilor 8, Brașov</span>
+        <aside class="rez-aside">
+          <div class="blk" data-reveal>
+            <h3>Contact</h3>
+            <a href="tel:+40700000000">0700 000 000</a>
+            <a href="https://wa.me/40700000000" rel="noopener">WhatsApp · wa.me/40700000000</a>
+            <p>Str. Mureșenilor 8, Brașov</p>
           </div>
-        </div>
-      </a>
-    </aside>
-  </div>
+
+          <div class="blk" data-reveal>
+            <h3>Program</h3>
+            <p>Marți–Duminică · 12:00–23:00</p>
+            <p style="color:var(--muted)">Luni închis</p>
+          </div>
+
+          <a class="map-ph" href={mapsUrl} target="_blank" rel="noopener" data-reveal>
+            <div class="mp-inner">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
+              </svg>
+              <span>Vezi pe hartă →</span>
+              <span class="mp-sub">Str. Mureșenilor 8, Brașov</span>
+            </div>
+          </a>
+        </aside>
+      </div>
+    </div>
+  </section>
 </Base>
