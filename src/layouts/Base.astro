@@ -2,7 +2,6 @@
 import { ClientRouter } from 'astro:transitions';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import ConceptBanner from '../components/ConceptBanner.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -71,16 +70,10 @@ const restaurantSchema = {
 
     <script type="application/ld+json" set:html={JSON.stringify(restaurantSchema)} />
 
-    {/* marchează motion permis înainte de paint → fără FOUC pe reveal-uri */}
-    <script is:inline>
-      if (!matchMedia('(prefers-reduced-motion: reduce)').matches)
-        document.documentElement.classList.add('motion');
-    </script>
-
     <ClientRouter />
   </head>
-  <body class="min-h-dvh bg-cream text-ink antialiased">
-    <ConceptBanner transition:persist />
+  <body>
+    <div class="grain" aria-hidden="true" transition:persist></div>
     <Nav transition:persist />
     <main id="main" transition:animate="fade">
       <slot />
@@ -88,7 +81,6 @@ const restaurantSchema = {
     <Footer transition:persist />
 
     <script>
-      import '../scripts/smooth.js';
       import '../scripts/reveal.js';
     </script>
   </body>

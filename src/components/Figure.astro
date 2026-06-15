@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+
+// Figură imagine în limbajul nou: container .imgph (radius + fallback gradient),
+// <Image> optimizat object-cover + caption mono opțională.
+interface Props {
+  img: string; // cheie asset (hero, dish-pizza, dish-pasta, atmosphere, story, gallery-1)
+  cls?: string; // clase extra: ratio (r43/r34/r169/r11/r32) + poziție grid (g1..)
+  cap?: string;
+  alt?: string;
+  eager?: boolean;
+  sizes?: string;
+  reveal?: boolean;
+}
+const { img, cls = 'r43', cap, alt, eager = false, sizes = '(max-width: 860px) 100vw, 600px', reveal = false } = Astro.props;
+
+const sources = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*.png', { eager: true });
+const map: Record<string, string> = {
+  hero: 'hero', 'dish-pizza': 'dish-pizza', 'dish-pasta': 'dish-pasta',
+  'dish-tagliata': 'hero', atmosphere: 'atmosphere', story: 'story', 'gallery-1': 'gallery-1',
+};
+const asset = sources[`/src/assets/images/${map[img] ?? img}.png`]?.default;
+const altText = alt ?? cap ?? `BRACE — ${img.replace(/-/g, ' ')}`;
+---
+
+<div class={`imgph ${cls}`} {...(reveal ? { 'data-reveal': '' } : {})}>
+  {asset && (
+    <Image
+      src={asset}
+      alt={altText}
+      widths={[400, 800, 1152]}
+      sizes={sizes}
+      format="avif"
+      loading={eager ? 'eager' : 'lazy'}
+      decoding={eager ? 'auto' : 'async'}
+      {...(eager ? { fetchpriority: 'high' } : {})}
+    />
+  )}
+  {cap && <span class="cap">{cap}</span>}
+</div>
